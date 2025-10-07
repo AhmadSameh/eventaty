@@ -484,3 +484,5 @@ $RECYCLE.BIN/
 *.swp
 API/appsettings.json
 API/eventaty.db
+API/eventaty.db-wal
+API/eventaty.db-shm
