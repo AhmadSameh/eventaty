@@ -487,4 +487,3 @@ API/eventaty.db
 API/eventaty.db-wal
 API/eventaty.db-shm
 .vscode/tasks.json
-.vscode/launch.json
