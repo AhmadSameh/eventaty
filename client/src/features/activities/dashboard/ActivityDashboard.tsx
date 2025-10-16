@@ -37,7 +37,7 @@ export default function ActivityDashboard({
                 {
                     selectedActivity && !editMode &&
                     <ActivityDetail
-                        activity={selectedActivity}
+                        selectedActivity={selectedActivity}
                         cancelSelectActivity={cancelSelectActivity}
                         openForm={openForm}
                     />
