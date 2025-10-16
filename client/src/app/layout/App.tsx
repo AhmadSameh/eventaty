@@ -1,21 +1,14 @@
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
-import axios from "axios";
 import { useState } from "react";
 import NavBar from "./NavBar";
 import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard";
-import { useQuery } from "@tanstack/react-query";
+import { useActivities } from "../../lib/hooks/useActivities";
 
 function App() {
     const [selectedActivity, setSelectedActivity] = useState<Activity | undefined>(undefined);
     const [editMode, setEditMode] = useState(false);
 
-    const { data: activities, isPending } = useQuery({
-        queryKey: ['activities'],
-        queryFn: async () => {
-            const respnose = await axios.get<Activity[]>("http://localhost:5001/api/activities");
-            return respnose.data;
-        }
-    });
+    const { activities, isPending } = useActivities();
 
     const handleSelectActivity = (id: string) => {
         setSelectedActivity(activities!.find(activity => activity.id === id));
@@ -32,17 +25,6 @@ function App() {
     }
 
     const handleFormClose = () => {
-        setEditMode(false);
-    }
-
-    const handleSubmitForm = (activity: Activity) => {
-        // if (activity.id) {
-        //     setActivities(activities.map(_activity => _activity.id === activity.id ? activity : _activity));
-        // } else {
-        //     const newActivity = { ...activity, id: activities.length.toString() };
-        //     setActivities([...activities, newActivity]);
-        // }
-        console.log(activity);
         setEditMode(false);
     }
 
@@ -67,7 +49,6 @@ function App() {
                         editMode={editMode}
                         openForm={handleOpenForm}
                         closeForm={handleFormClose}
-                        submitForm={handleSubmitForm}
                         deleteActivity={handleDelete}
                     />
                 )}
