@@ -13,7 +13,10 @@ builder.Services.AddDbContext<AppDbContext>(opt =>
 });
 builder.Services.AddCors();
 builder.Services.AddMediatR(cfg =>
-    cfg.RegisterServicesFromAssemblyContaining<GetActivityList.Handler>()
+{
+    cfg.RegisterServicesFromAssemblyContaining<GetActivityList.Handler>();
+    cfg.AddBehavior(typeof(ValidationBehavior<,>));
+}
 );
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 builder.Services.AddValidatorsFromAssemblyContaining<CreateActivityValidator>();
